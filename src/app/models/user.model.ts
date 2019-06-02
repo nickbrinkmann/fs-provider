@@ -1,6 +1,7 @@
 export class User {
     public firstname: string;
     public lastname: string;
+    public id: number;
     public email: string;
     public phone_number: string;
     public where_lives: string;
@@ -13,6 +14,7 @@ export class User {
     constructor() {
         this.firstname="";
         this.lastname="";
+        this.id = undefined;
         this.email="";
         this.phone_number="";
         this.where_lives="";

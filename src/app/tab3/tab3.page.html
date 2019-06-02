@@ -1,25 +1,52 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="tabs"></ion-back-button>
-    </ion-buttons>
-    <ion-title>
-      Update Your Listings
-    </ion-title>
+    <ion-title><ion-icon name="person"></ion-icon> Profile of {{currentuser.firstname}} {{currentuser.lastname}}</ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Listing 1</ion-card-title>
-      <ion-card-subtitle>Listing Address/Location</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-avatar>
-        <img src="https://i.boring.host/16AXfItu.jpg">
+  
+  <ion-content>
+    
+    <div class="ion-padding">
+      <ion-avatar class="avatar">
+        <img src="{{currentuser.avatar_src}}">
       </ion-avatar>
-      <ion-button>Update Listing</ion-button>
-    </ion-card-content>
-  </ion-card>
-</ion-content>
+      <h2>Hi, I'm {{currentuser.firstname}}</h2>
+      <p>Joined in {{currentuser.join_date}}</p>
+    </div>
+  
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>About</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p><ion-icon name="home"></ion-icon>Lives in {{currentuser.where_lives}}</p>
+        <p><ion-icon name="mail"></ion-icon>Email address: {{currentuser.email}}</p>
+        <p><ion-icon name="call"></ion-icon>Phone number: {{currentuser.phone_number}}</p>
+      </ion-card-content>
+
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>User Information</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p>Number of Bookings Completed: {{currentuser.trips_booked}}</p>
+        <p>Number of Reviews Received: {{currentuser.reviews_given}}</p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Reviews</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        *User Reviews Go Here*
+      </ion-card-content>
+    </ion-card>
+
+
+  </ion-content>
+
