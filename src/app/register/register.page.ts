@@ -1,19 +1,19 @@
-import { Component } from '@angular/core';
-import { Property } from '../models';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NavController, AlertController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss']
+  selector: 'app-register',
+  templateUrl: './register.page.html',
+  styleUrls: ['./register.page.scss'],
 })
-export class Tab2Page {
-  public property: any = {
-    name: "",
-    location: "",
-    imgname: "",
-    price: ""
+export class RegisterPage implements OnInit {
+
+  public user: any = {
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: ""
   };
 
   constructor(
@@ -27,29 +27,27 @@ export class Tab2Page {
 
   submit() {
     console.log("Submitting to the server...");
-    console.log(this.property);
-
-    //Using Local Storage!! The local storage user id key is stored with login at login.page.ts
-    this.property.ownerid = localStorage.getItem("user_id");
-    
+    // console.log(this.user);
     this.httpClient
-      .post("http://localhost:3000/api/properties/register", this.property)
+      .post("http://localhost:3000/api/users/register", this.user)
       //Response is for success, err is for errors.
       .subscribe(
         (response: any) => {
-          console.log(response);
-          
-          //If successful listing created, stores propertyId to pass as query parameter to other pages in app
-          const propertyId = response.id;
+          //If successful login, stores userId to pass as query parameter to other pages in app
+          const userId = response.id;
 
-          //Navigates to newly created property details page
-          this.navCtrl.navigateForward('property-details',
+          //Stores userid in local storage so that we can keep the user id everywhere once logged in. See its complement in
+          //tab3.page.ts
+          localStorage.setItem("user_id", userId);
+
+          //Navigates to explore tab
+          this.navCtrl.navigateForward('tabs',
             {
               queryParams: {
-                propertyId: response.id
+                userId: response.id
               }
             });
-          //The above passes the propertyId as a query parameter
+          //The above tries to pass the user id from page to page, try to get it to work.
         },
         (err) => {
           console.log(err);
@@ -62,6 +60,7 @@ export class Tab2Page {
   async presentAlert(error) {
     const alert = await this.alertCtrl.create({
       header: 'Error',
+      // subHeader: 'yooz dumm',
       message: error,
       buttons: [
         {
@@ -74,4 +73,5 @@ export class Tab2Page {
     });
     return await alert.present();
   }
+
 }

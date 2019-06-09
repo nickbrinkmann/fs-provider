@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title><ion-icon name="person"></ion-icon> Profile of {{currentuser.firstname}} {{currentuser.lastname}}</ion-title>
+    <ion-title><ion-icon name="person"></ion-icon> Profile of {{user.firstname}} {{user.lastname}}</ion-title>
   </ion-toolbar>
 </ion-header>
   
@@ -8,10 +8,10 @@
     
     <div class="ion-padding">
       <ion-avatar class="avatar">
-        <img src="{{currentuser.avatar_src}}">
+        <img src="https://i.boring.host/15G7acWX.png">
       </ion-avatar>
-      <h2>Hi, I'm {{currentuser.firstname}}</h2>
-      <p>Joined in {{currentuser.join_date}}</p>
+      <h2>Hi, I'm {{user.firstname}}</h2>
+      <p>Joined in {{user.join_date}}</p>
     </div>
   
     <ion-card>
@@ -19,9 +19,9 @@
         <ion-card-title>About</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <p><ion-icon name="home"></ion-icon>Lives in {{currentuser.where_lives}}</p>
-        <p><ion-icon name="mail"></ion-icon>Email address: {{currentuser.email}}</p>
-        <p><ion-icon name="call"></ion-icon>Phone number: {{currentuser.phone_number}}</p>
+        <p><ion-icon name="home"></ion-icon>Lives in {{user.where_lives}}</p>
+        <p><ion-icon name="mail"></ion-icon>Email address: {{user.email}}</p>
+        <p><ion-icon name="call"></ion-icon>Phone number: {{user.cellphone}}</p>
       </ion-card-content>
 
     </ion-card>
@@ -32,8 +32,8 @@
       </ion-card-header>
 
       <ion-card-content>
-        <p>Number of Bookings Completed: {{currentuser.trips_booked}}</p>
-        <p>Number of Reviews Received: {{currentuser.reviews_given}}</p>
+        <p>Number of Bookings Completed: {{user.trips_booked}}</p>
+        <p>Number of Reviews Received: {{user.reviews_given}}</p>
       </ion-card-content>
     </ion-card>
 

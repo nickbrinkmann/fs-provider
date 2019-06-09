@@ -1,21 +1,36 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="tabs"></ion-back-button>
-    </ion-buttons>
-    <ion-title>
-      Create New Listing
-    </ion-title>
+    <ion-back-button defaultHref = 'tabs'></ion-back-button>
+    <ion-title>Create A Listing</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <!-- <ion-input type="text" placeholder="City, Country" [ (ngModel) ]="my_location"></ion-input>
-  <ion-input type="text" placeholder="Street Address" [ (ngModel) ]="my_address"></ion-input>
-  <ion-input type="text" placeholder="Image URL" [ (ngModel) ]="my_imgName"></ion-input>
-  <ion-input type="text" placeholder="Occupancy (Number)" [ (ngModel) ]="my_occupancy"></ion-input>
-  <ion-button (click)="create_listing()">Create Listing</ion-button> -->
-
-  <ion-button>Create New Listing</ion-button>
-</ion-content>
-
+    <div class="ion-padding">
+  
+      <ion-item>
+        <ion-label>Listing Name</ion-label>
+        <ion-input [(ngModel)]="property.name"></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Location</ion-label>
+        <ion-input [(ngModel)]="property.location"></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Image URL (online)</ion-label>
+        <ion-input [(ngModel)]="property.imgname"></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Price</ion-label>
+        <ion-input [(ngModel)]="property.price"></ion-input>
+      </ion-item>
+  
+      <ion-button expand = "full" (click)="submit()">
+        Create Listing
+      </ion-button>
+  
+    </div>
+  </ion-content>

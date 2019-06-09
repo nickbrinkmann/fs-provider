@@ -6,17 +6,19 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf = "properties">
   <ion-list>
-    <ion-item *ngFor="let listing of Listings">
+    <ion-item
+    *ngFor="let property of properties"
+    (click)="navToProperty(property)">
       <ion-card>
         <ion-card-header>
-          <ion-card-title>{{listing.location}}</ion-card-title>
-          <ion-card-subtitle>{{listing.price}} at {{listing.address}}</ion-card-subtitle>
+          <ion-card-title>{{property.name}}</ion-card-title>
+          <ion-card-subtitle>${{property.price}} per day at {{property.location}}</ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
           <ion-avatar>
-            <img src="{{listing.imgName}}">
+            <img src="{{property.imgname}}">
           </ion-avatar>
         </ion-card-content>
       </ion-card>

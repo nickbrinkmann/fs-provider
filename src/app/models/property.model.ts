@@ -1,17 +1,21 @@
 export class Property {
+    public id: number;
+    public name: string;
     public price: string;
-    public imgName: string;
+    public imgname: string;
     public location: string;
     public address: string;
     public occupancy: number;
-    public listing_owner: string;
+    public ownerid: number;
 
     constructor() {
+        this.id = undefined;
+        this.name = "";
         this.price="";
-        this.imgName="";
+        this.imgname="";
         this.location="";
         this.address="";
         this.occupancy=undefined;
-        this.listing_owner="";
+        this.ownerid=undefined;
     }
 }

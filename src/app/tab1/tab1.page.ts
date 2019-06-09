@@ -1,37 +1,66 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Property } from '../models';
+import { NavController, AlertController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page {
+export class Tab1Page implements OnInit {
 
-  public Listings: Array<Property> = [];
+  public properties: Array<Property> = [];
+  public userid = localStorage.getItem("user_id");
 
-  constructor() {
-    let listing1 = new Property();
-    listing1.price="$50 per day";
-    listing1.imgName="https://i.boring.host/16AXfItu.jpg";
-    listing1.location="Zagreb, Croatia";
-    listing1.address="5 Fake Address Road, Zagreb"
+  constructor(
+    private navCtrl: NavController,
+    private activatedRoute: ActivatedRoute,
+    private alertCtrl: AlertController,
+    private httpClient: HttpClient
+  ) { }
 
-    let listing2 = new Property();
-    listing2.price="$100 per day";
-    listing2.imgName="https://i.boring.host/16AYUMML.jpg";
-    listing2.location="Buenos Aires, Argentina";
-    listing2.address="12 Not Real Drive, Buenos Aires";
+  ngOnInit() {
 
-    let listing3 = new Property();
-    listing3.price="$30 per day";
-    listing3.imgName="https://i.boring.host/16AZPdCE.jpg";
-    listing3.location="Toronto, Canada";
-    listing3.address="69 Dis A Dream Road, Toronto"
+    let arrow = async (data: any) => {
+      // this.propertyId = data.params.propertyId;
+      console.log(this.userid);
 
-    this.Listings.push(listing1);
-    this.Listings.push(listing2);
-    this.Listings.push(listing3);
+      //Sends an HTTP request to find properties owned by user
+
+      this.httpClient
+        .get("http://localhost:3000/api/properties/owner/" + this.userid)
+        .subscribe(
+          async (response: any) => {
+            console.log(response);
+            // console.log(response.id);
+
+            //If successfully found properties, stores them to the properties array
+            this.properties = response;
+          },
+          err => {
+            console.log("Error");
+            alert("Failed to find properties for this user");
+          }
+        );
+
+      }
+
+    this.activatedRoute.queryParamMap.subscribe(
+      // When QueryParams are received, this sends the http request to the api.
+      arrow
+    );
+  }
+
+  navToProperty(property: Property) {
+    this.navCtrl.navigateForward('property-details',
+    {
+      //This passes the propertyId as a query parameter
+      queryParams: {
+        propertyId: property.id 
+      }
+    });
   }
 
 }
