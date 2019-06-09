@@ -6,6 +6,7 @@
 </ion-header>
 <!--DON'T FORGET TO USE NG IF!!!-->
 <ion-content>
+
   <ion-card *ngIf="currentProperty">
     <ion-card-header>
       <ion-card-title>{{currentProperty.name}}</ion-card-title>
@@ -16,6 +17,27 @@
         <img src="{{currentProperty.imgname}}">
       </ion-avatar>
       <p>Price Per Night: ${{currentProperty.price}}</p>
+      <ion-button>Update this listing's information</ion-button>
+      <!--THE NEXT STEP IS TO MAKE THIS BUTTON SEND A PATCH HTTP REQUEST TO THE API-->
     </ion-card-content>
   </ion-card>
+
+  <ion-list *ngIf="bookingRequests">
+    <ion-title>Booking Requests for this Property</ion-title>
+    <ion-item *ngFor="let bookingrequest of bookingRequests">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>From {{bookingrequest.datefrom}} to {{bookingrequest.dateto}}</ion-card-title>
+          <ion-card-subtitle>Someone wants to stay at {{currentProperty.name}}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <p>Would you like to accept this request?</p>
+          <ion-button>Accept</ion-button>
+          <ion-button>Reject</ion-button>
+          <!--THE NEXT STEP IS TO MAKE THESE BUTTONS SEND A PATCH HTTP REQUEST TO THE API-->
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+
 </ion-content>

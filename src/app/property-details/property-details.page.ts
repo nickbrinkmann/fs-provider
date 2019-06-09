@@ -13,6 +13,7 @@ export class PropertyDetailsPage implements OnInit {
 
   public propertyId: number;
   public currentProperty = new Property();
+  public bookingRequests: Array<any>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -50,6 +51,7 @@ export class PropertyDetailsPage implements OnInit {
           }
         );
 
+      //If the propertyid doesn't exist, creates an error.
       if (!this.currentProperty) {
         const alert = await this.alertCtrl.create({
           header: 'Alert',
@@ -60,8 +62,23 @@ export class PropertyDetailsPage implements OnInit {
 
         await alert.present();
         this.navigateBack();
-
       }
+
+      //Sends an HTTP request to the API to find all booking requests for the property
+      this.httpClient
+        .get("http://localhost:3000/api/properties/" + this.propertyId + "/bookings")
+        .subscribe(
+          async (response: any) => {
+            console.log(response);
+            //If successfully found booking requests, stores info into booking requests array
+            this.bookingRequests = response;
+          },
+          err => {
+            console.log("Error");
+            alert("Failed to find booking requests");
+            this.navigateBack();
+          }
+        );
 
     };
 
